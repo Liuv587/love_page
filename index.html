@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head> 
-  <title>1Chat引导页</title> 
+  <title>韩斌个人page</title> 
   <meta name="description" content="那些暗潮汹涌的 见不得人的 无法诉之于口的才是我真正的生活|关键词：Suinian,Nianbroken" /> 
   <meta charset="utf-8" /> 
    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -26,9 +26,9 @@
     <div class="content"> 
      <div class="inner"> 
       <!-- <h1>1Chat引导页</h1> -->
-      <h3>一起见证我们的幸福</h3>
+      <h3>我明白你会来，所以我等。</h3>
       <h3>
-       XX和XX在一起已经
+       距离2026年还有
        <span id="togetherDays">0</span>天
        <span id="togetherHours">0</span>小时
        <span id="togetherMinutes">0</span>分
@@ -79,18 +79,18 @@
   <script src="https://qiniuchat.littlewheat.com/link/assets/js/main.js"></script>
 
   <script>
-	  // 在一起的起始时间：把下面这行改成你们在一起的日期时间（北京时间）
-	  // 示例：2024-02-14 20:00:00 -> new Date("2024-02-14T20:00:00+08:00")
-	  const togetherSince = new Date("2025-01-01T00:00:00+08:00");
+	  // 倒计时目标时间：2026-01-01 00:00:00（北京时间）
+	  // 示例：2026-01-01 00:00:00 -> new Date("2026-01-01T00:00:00+08:00")
+	  const targetTime = new Date("2026-01-01T00:00:00+08:00");
 
 	  const elDays = document.getElementById("togetherDays");
 	  const elHours = document.getElementById("togetherHours");
 	  const elMinutes = document.getElementById("togetherMinutes");
 	  const elSeconds = document.getElementById("togetherSeconds");
 
-	  function updateTogetherTimer() {
+	  function updateCountdownTimer() {
 		const now = new Date();
-		let diffSec = Math.floor((now.getTime() - togetherSince.getTime()) / 1000);
+		let diffSec = Math.floor((targetTime.getTime() - now.getTime()) / 1000);
 		if (!Number.isFinite(diffSec) || diffSec < 0) {
 		  diffSec = 0;
 		}
@@ -108,8 +108,8 @@
 		elSeconds.innerText = String(seconds);
 	  }
 
-	  updateTogetherTimer();
-	  setInterval(updateTogetherTimer, 1000);
+	  updateCountdownTimer();
+	  setInterval(updateCountdownTimer, 1000);
   </script>
 
   <style>canvas { padding:0; margin:0; }</style> 
