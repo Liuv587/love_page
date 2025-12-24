@@ -26,7 +26,7 @@
     <div class="content"> 
      <div class="inner"> 
       <!-- <h1>1Chat引导页</h1> -->
-      <h3>我明白你会来，所以我等。</h3>
+      <h3 class="main-slogan">我明白你会来，所以我等</h3>
       <h3>
        距离2026年还有
        <span id="togetherDays">0</span>天
@@ -121,6 +121,17 @@
        这里加一个不可见的占位 li 来撑起布局，但不影响视觉与交互。 */
     .nav-placeholder { visibility: hidden; }
     .nav-placeholder a { pointer-events: none; }
+
+    /* 顶部文案放大一点（PC 更大，手机略小防止拥挤） */
+    #header .content .inner .main-slogan {
+      font-size: 1.75em;
+      line-height: 1.35;
+    }
+    @media screen and (max-width: 736px) {
+      #header .content .inner .main-slogan {
+        font-size: 1.45em;
+      }
+    }
   </style> 
   <!-- sakura shader --> 
   <script id="sakura_point_vsh" type="x-shader/x_vertex">
