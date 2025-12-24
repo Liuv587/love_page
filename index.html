@@ -123,6 +123,16 @@
       min-height: 3.25em;
     }
 
+    /* 隐藏主题给空 nav 画的方框装饰（只保留上面那条 T 型线） */
+    #header nav ul {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+    #header nav ul li {
+      display: none !important;
+    }
+
     /* 顶部文案放大一点（PC 更大，手机略小防止拥挤） */
     #header .content .inner .main-slogan {
       font-size: 1.75em;
