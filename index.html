@@ -126,11 +126,22 @@
       height: 80px !important;
       margin: 0 auto !important;
     }
-    #header nav ul,
     #header nav ul li,
     #header nav ul li a {
       all: unset !important;
       display: none !important;
+    }
+    /* 用 ul 来画底部短横线装饰 */
+    #header nav ul {
+      all: unset !important;
+      display: block !important;
+      position: absolute !important;
+      left: 50% !important;
+      top: 48px !important;
+      width: 160px !important;
+      height: 1px !important;
+      background: rgba(255,255,255,0.35) !important;
+      transform: translateX(-50%) !important;
     }
 
     /* ===== 自定义装饰线（模仿手机端效果）===== */
