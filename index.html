@@ -80,27 +80,28 @@
 
   <script>
 	  // 倒计时目标时间：2026-01-01 00:00:00（北京时间）
-	  // 示例：2026-01-01 00:00:00 -> new Date("2026-01-01T00:00:00+08:00")
-	  const targetTime = new Date("2026-01-01T00:00:00+08:00");
+	  // 说明：为避免部分浏览器对字符串日期解析差异，这里用 UTC 构造目标时间。
+	  // 北京时间 2026-01-01 00:00:00 = UTC 2025-12-31 16:00:00
+	  var targetTime = new Date(Date.UTC(2025, 11, 31, 16, 0, 0));
 
-	  const elDays = document.getElementById("togetherDays");
-	  const elHours = document.getElementById("togetherHours");
-	  const elMinutes = document.getElementById("togetherMinutes");
-	  const elSeconds = document.getElementById("togetherSeconds");
+	  var elDays = document.getElementById("togetherDays");
+	  var elHours = document.getElementById("togetherHours");
+	  var elMinutes = document.getElementById("togetherMinutes");
+	  var elSeconds = document.getElementById("togetherSeconds");
 
 	  function updateCountdownTimer() {
-		const now = new Date();
-		let diffSec = Math.floor((targetTime.getTime() - now.getTime()) / 1000);
-		if (!Number.isFinite(diffSec) || diffSec < 0) {
-		  diffSec = 0;
-		}
+		var nowMs = Date.now ? Date.now() : new Date().getTime();
+		var diffSec = Math.floor((targetTime.getTime() - nowMs) / 1000);
 
-		const days = Math.floor(diffSec / 86400);
+		// 兼容性与兜底：NaN/负数都归零
+		if (!isFinite(diffSec) || diffSec < 0) diffSec = 0;
+
+		var days = Math.floor(diffSec / 86400);
 		diffSec -= days * 86400;
-		const hours = Math.floor(diffSec / 3600);
+		var hours = Math.floor(diffSec / 3600);
 		diffSec -= hours * 3600;
-		const minutes = Math.floor(diffSec / 60);
-		const seconds = diffSec - minutes * 60;
+		var minutes = Math.floor(diffSec / 60);
+		var seconds = diffSec - minutes * 60;
 
 		elDays.innerText = String(days);
 		elHours.innerText = String(hours);
