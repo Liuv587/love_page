@@ -119,8 +119,16 @@
 
     /* nav 没有任何可见项时，部分 PC 布局会把 nav 高度压扁导致装饰线消失。
        这里加一个不可见的占位 li 来撑起布局，但不影响视觉与交互。 */
-    .nav-placeholder { visibility: hidden; }
-    .nav-placeholder a { pointer-events: none; }
+    .nav-placeholder {
+      opacity: 0;            /* 彻底不可见（避免出现空按钮方框） */
+      pointer-events: none;  /* 不可点击 */
+    }
+    .nav-placeholder a {
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
 
     /* 顶部文案放大一点（PC 更大，手机略小防止拥挤） */
     #header .content .inner .main-slogan {
