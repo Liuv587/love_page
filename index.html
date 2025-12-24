@@ -34,7 +34,6 @@
        <span id="togetherMinutes">0</span>分
        <span id="togetherSeconds">0</span>秒
       </h3>
-      <div class="countdown-divider" aria-hidden="true"></div>
 
 <!--      <h4><strong>！！！请收藏引导页地址！！！</strong></h4>-->
      </div> 
@@ -49,6 +48,7 @@
       <li> <a target="_blank" href="https://0.0chat.cc">(请收藏)备用导航</a></li>
       -->
       <!--<li><a href="#elements">Elements</a></li>-->
+      <li class="nav-placeholder" aria-hidden="true"><a href="javascript:void(0)" tabindex="-1"></a></li>
      </ul> 
     </nav> 
    </header> 
@@ -117,34 +117,10 @@
   <style>
     canvas { padding:0; margin:0; }
 
-    /* 独立分割线：避免 nav 为空时 PC 端不显示装饰线 */
-    .countdown-divider {
-      position: relative;
-      width: min(560px, 78vw);
-      height: 32px;
-      margin: 28px auto 0;
-      opacity: 0.75;
-      pointer-events: none;
-    }
-    .countdown-divider::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.65);
-    }
-    .countdown-divider::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      width: 1px;
-      height: 100%;
-      transform: translateX(-0.5px);
-      background: rgba(255, 255, 255, 0.65);
-    }
+    /* nav 没有任何可见项时，部分 PC 布局会把 nav 高度压扁导致装饰线消失。
+       这里加一个不可见的占位 li 来撑起布局，但不影响视觉与交互。 */
+    .nav-placeholder { visibility: hidden; }
+    .nav-placeholder a { pointer-events: none; }
   </style> 
   <!-- sakura shader --> 
   <script id="sakura_point_vsh" type="x-shader/x_vertex">
