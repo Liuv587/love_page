@@ -26,12 +26,13 @@
     <div class="content"> 
      <div class="inner"> 
       <!-- <h1>1Chat引导页</h1> -->
-      <h3 class="main-slogan">我明白你会来，所以我等</h3>
+      <h3 class="main-slogan">愿悠长岁月，温柔安好<br>日日和煦，可盼可期</h3>
       <h3>
-       离中午吃饭（12:30）还有
+       距离元旦还有
+       <span id="countdownDays">0</span>天
+       <span id="countdownHours">0</span>小时
        <span id="countdownMinutes">0</span>分
        <span id="countdownSeconds">0</span>秒
-       <span id="countdownMs">0</span>毫秒
       </h3>
 
 <!--      <h4><strong>！！！请收藏引导页地址！！！</strong></h4>-->
@@ -72,50 +73,37 @@
   <script src="https://qiniuchat.littlewheat.com/link/assets/js/main.js"></script>
 
   <script>
-	  // 倒计时到每天中午 12:30 吃饭
-	  // 如果当前时间已过 12:30，则倒计时到明天的 12:30
+	  // 倒计时到2026年元旦（北京时间 2026-01-01 00:00:00）
+	  // 北京时间 2026-01-01 00:00:00 = UTC 2025-12-31 16:00:00
+	  var targetTime = new Date(Date.UTC(2025, 11, 31, 16, 0, 0));
 
+	  var elDays = document.getElementById("countdownDays");
+	  var elHours = document.getElementById("countdownHours");
 	  var elMinutes = document.getElementById("countdownMinutes");
 	  var elSeconds = document.getElementById("countdownSeconds");
-	  var elMs = document.getElementById("countdownMs");
 
-	  function getNextLunchTime() {
-		var now = new Date();
-		var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 30, 0, 0);
-		// 如果今天 12:30 已过，则目标改为明天 12:30
-		if (now.getTime() >= target.getTime()) {
-		  target.setDate(target.getDate() + 1);
-		}
-		return target;
-	  }
-
-	  var lunchTarget = getNextLunchTime();
-
-	  function updateLunchCountdown() {
+	  function updateCountdown() {
 		var nowMs = Date.now ? Date.now() : new Date().getTime();
-		var diffMs = lunchTarget.getTime() - nowMs;
+		var diffSec = Math.floor((targetTime.getTime() - nowMs) / 1000);
 
-		// 如果时间已到，重新计算下一个 12:30
-		if (diffMs <= 0) {
-		  lunchTarget = getNextLunchTime();
-		  diffMs = lunchTarget.getTime() - nowMs;
-		}
+		// 兼容性兜底：NaN/负数都归零
+		if (!isFinite(diffSec) || diffSec < 0) diffSec = 0;
 
-		// 兼容性兜底
-		if (!isFinite(diffMs) || diffMs < 0) diffMs = 0;
+		var days = Math.floor(diffSec / 86400);
+		diffSec -= days * 86400;
+		var hours = Math.floor(diffSec / 3600);
+		diffSec -= hours * 3600;
+		var minutes = Math.floor(diffSec / 60);
+		var seconds = diffSec - minutes * 60;
 
-		var totalSeconds = Math.floor(diffMs / 1000);
-		var minutes = Math.floor(totalSeconds / 60);
-		var seconds = totalSeconds % 60;
-		var ms = diffMs % 1000;
-
+		elDays.innerText = String(days);
+		elHours.innerText = String(hours);
 		elMinutes.innerText = String(minutes);
 		elSeconds.innerText = String(seconds);
-		elMs.innerText = String(ms);
 	  }
 
-	  updateLunchCountdown();
-	  setInterval(updateLunchCountdown, 47); // 约21fps，让毫秒数跳动流畅
+	  updateCountdown();
+	  setInterval(updateCountdown, 1000); // 每秒更新一次
   </script>
 
   <style>
